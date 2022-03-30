@@ -1,0 +1,32 @@
+import plotly.graph_objects as go
+from ipywidgets import widgets
+origin = widgets.Dropdown(
+    options=list(df_case['PROVINCE'].unique()),
+    description='Province:',
+)
+
+
+trace1 = go.Scatter(y=df_case['CASES'], opacity=0.75)
+g = go.FigureWidget(data=go.Scatter(x=df_case['DATE'],y=df_case['CASES']))
+
+def validate():
+    if origin.value in df_case['CASES']:
+        return True
+    else:
+        return False
+
+
+def response(change):
+    if validate():
+        temp_df = temp_df["PROVINCE" == origin.value]
+        x1 = temp_df['CASES']
+        with g.batch_update():
+            g.data[0].x = x1
+            g.layout.barmode = 'overlay'
+            g.layout.xaxis.title = 'Delay in Minutes'
+            g.layout.yaxis.title = 'Number of Delays'
+
+
+origin.observe(response, names="value")
+container = widgets.HBox([origin])
+widgets.VBox([container,g])
