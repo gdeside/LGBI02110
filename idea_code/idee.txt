@@ -30,3 +30,25 @@ def response(change):
 origin.observe(response, names="value")
 container = widgets.HBox([origin])
 widgets.VBox([container,g])
+
+
+beta = np.ones(N)
+beta[:22] = beta[:22]*0.95
+
+beta[22:35] = beta[22:35]*0.45
+
+beta[35:110] = beta[35:110]*0.4
+
+beta[110:165] = beta[110:165]*0.5
+
+beta[165:210]= beta[165:210]*0.75
+beta[210:232] = beta[210:232]*0.85
+
+beta[232:240] = beta[232:240]*0.55
+
+beta[240:270] = beta[240:270]*0.45
+
+beta[270:320] = beta[270:320]*0.55
+
+beta[320:] = beta[320:]*0.65
+print(lst_range[300])
